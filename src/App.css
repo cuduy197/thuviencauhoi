@@ -1,24 +1,98 @@
-.App {
-  text-align: center;
+body {
+    font-family: "Comfortaa", sans-serif !important;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+    background-color: #222;
+    height: 70px;
+    padding: 20px;
+    color: white;
 }
 
 .App-intro {
-  font-size: large;
+    padding-top: 2em;
+    margin: 0 auto;
+    width: 100%;
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.padding-container {
+    padding: 2.5em;
+}
+
+
+/*
+.___  ___.   ______   .______    __   __       _______ 
+|   \/   |  /  __  \  |   _  \  |  | |  |     |   ____|
+|  \  /  | |  |  |  | |  |_)  | |  | |  |     |  |__   
+|  |\/|  | |  |  |  | |   _  <  |  | |  |     |   __|  
+|  |  |  | |  `--'  | |  |_)  | |  | |  `----.|  |____ 
+|__|  |__|  \______/  |______/  |__| |_______||_______|
+                                                       */
+
+@media only screen and (max-width: 500px) {
+    .mobile,
+    .medium {
+        display: block;
+    }
+    .decktop {
+        display: none !important;
+    }
+    .padding-container {
+        padding: 0.2em;
+    }
+}
+
+td {
+    text-align: left;
+    border: 1px solid rebeccapurple;
+}
+
+
+/*
+.___  ___.  _______  _______   __   __    __  .___  ___. 
+|   \/   | |   ____||       \ |  | |  |  |  | |   \/   | 
+|  \  /  | |  |__   |  .--.  ||  | |  |  |  | |  \  /  | 
+|  |\/|  | |   __|  |  |  |  ||  | |  |  |  | |  |\/|  | 
+|  |  |  | |  |____ |  '--'  ||  | |  `--'  | |  |  |  | 
+|__|  |__| |_______||_______/ |__|  \______/  |__|  |__| 
+                                                         */
+
+@media only screen and (max-width: 1000px) {
+    .medium,
+    .mobile {
+        display: block;
+    }
+    .decktop {
+        display: none !important;
+    }
+}
+
+
+/*
+ _______   _______   ______  __  ___ .___________.  ______   .______   
+|       \ |   ____| /      ||  |/  / |           | /  __  \  |   _  \  
+|  .--.  ||  |__   |  ,----'|  '  /  `---|  |----`|  |  |  | |  |_)  | 
+|  |  |  ||   __|  |  |     |    <       |  |     |  |  |  | |   ___/  
+|  '--'  ||  |____ |  `----.|  .  \      |  |     |  `--'  | |  |      
+|_______/ |_______| \______||__|\__\     |__|      \______/  | _|      
+                                                                       */
+
+@media only screen and (min-width: 1124px) {
+    .decktop {
+        display: block;
+    }
 }
