@@ -1,6 +1,6 @@
 /*eslint-disable */
 import React from 'react';
-import { Menu, Icon, Button } from 'antd';
+import { Menu, Icon, Button, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -16,7 +16,6 @@ export default class NavBar extends React.Component {
     .----)   |      |  |     /  _____  \   |  |     |  |____ 
     |_______/       |__|    /__/     \__\  |__|     |_______|
     																												 */
-
 
     state = {
         current: 'mail',
@@ -49,21 +48,21 @@ export default class NavBar extends React.Component {
 
         const NavMobile =
             <Menu onClick={this.handleClick}
-				theme=""
-				style={{ lineHeight: '64px' }}
+				       
 				mode="horizontal">
-				<Menu.Item style={{ float: 'right' }} key="homepage">
+				<Menu.Item key="homepage">
 					<Link to="/">Trang chủ <Icon type="home" /></Link>
 				</Menu.Item>
-
-				<SubMenu title={<span><Icon type="appstore" />Môn học</span>} style={{ float: 'left' }}>
+			  <Menu.Item key="guide">
+					<Link to="/huongdan">Hướng dẫn <Icon type="question-circle-o" /></Link>
+        </Menu.Item>
+				{/*<SubMenu title={<span><Icon type="appstore" />Môn học</span>} style={{ float: 'left' }}>
 					{this.state.menu.map(n =>
 						<Menu.Item key={n}>
 							<Link to="/">{n}</Link>
 						</Menu.Item>)}
-				</SubMenu>
+				</SubMenu>*/}
 			</Menu>;
-
 
         const NavDecktop =
             (
@@ -80,7 +79,6 @@ export default class NavBar extends React.Component {
 							<a href="/">{n}</a>
 						</Menu.Item>)}
 				</Menu>*/
-
 
                 <Menu
 					onClick={this.handleClick}

@@ -4,80 +4,78 @@ import Editor from './Editor.jsx';
 import { Button, Tabs, Icon, Popover } from 'antd';
 const TabPane = Tabs.TabPane;
 
-
 export default class CreateQuiz extends Component {
 
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.getQuestionHtml = this.getQuestionHtml.bind(this);
-		this.getAnswerHtml = this.getAnswerHtml.bind(this);
-		this.getAnswer2Html = this.getAnswer2Html.bind(this);
-		this.getAnswer3Html = this.getAnswer3Html.bind(this);
-		this.getAnswer4Html = this.getAnswer4Html.bind(this);
-		this.getHintHtml = this.getHintHtml.bind(this);
-		this.getSloveHtml = this.getSloveHtml.bind(this);
+        this.getQuestionHtml = this.getQuestionHtml.bind(this);
+        this.getAnswerHtml = this.getAnswerHtml.bind(this);
+        this.getAnswer2Html = this.getAnswer2Html.bind(this);
+        this.getAnswer3Html = this.getAnswer3Html.bind(this);
+        this.getAnswer4Html = this.getAnswer4Html.bind(this);
+        this.getHintHtml = this.getHintHtml.bind(this);
+        this.getSloveHtml = this.getSloveHtml.bind(this);
 
-		this.state = {
-			quiz : {
-			question: '',
-			answer: '',
-			answer2: '',
-			answer3: '',
-			answer4: '',
-			hint: '',
-			slove: ''
-			}
-		}
-	}
+        this.state = {
+            quiz: {
+                question: '',
+                answer: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                hint: '',
+                slove: ''
+            }
+        }
+    }
 
-	getQuestionHtml() {
-		this.setState({ quiz: {  ...this.state.quiz, question: this.question.getHtml() }})
-	}
+    componentDidMount() {}
 
-	getAnswerHtml() {
-		this.setState({ quiz: {  ...this.state.quiz,  answer: this.answer.getHtml() }})
-	}
-	getAnswer2Html() {
-		this.setState({ quiz: {  ...this.state.quiz,  answer2: this.answer2.getHtml() }})
-	}
-	getAnswer3Html() {
-		this.setState({ quiz: {  ...this.state.quiz,  answer3: this.answer3.getHtml() }})
-	}
-	getAnswer4Html() {
-		this.setState({ quiz: {  ...this.state.quiz,  answer4: this.answer4.getHtml() }})
-	}
+    getQuestionHtml() {
+        this.setState({ quiz: {...this.state.quiz, question: this.question.getHtml() } })
+    }
 
-	getHintHtml() {
-		this.setState({ quiz: {  ...this.state.quiz, hint: this.hint.getHtml() }})
-	}
+    getAnswerHtml() {
+        this.setState({ quiz: {...this.state.quiz, answer: this.answer.getHtml() } })
+    }
+    getAnswer2Html() {
+        this.setState({ quiz: {...this.state.quiz, answer2: this.answer2.getHtml() } })
+    }
+    getAnswer3Html() {
+        this.setState({ quiz: {...this.state.quiz, answer3: this.answer3.getHtml() } })
+    }
+    getAnswer4Html() {
+        this.setState({ quiz: {...this.state.quiz, answer4: this.answer4.getHtml() } })
+    }
 
-	getSloveHtml() {
-		this.setState({ quiz: {  ...this.state.quiz,  slove: this.slove.getHtml() }})
-	}
+    getHintHtml() {
+        this.setState({ quiz: {...this.state.quiz, hint: this.hint.getHtml() } })
+    }
 
+    getSloveHtml() {
+        this.setState({ quiz: {...this.state.quiz, slove: this.slove.getHtml() } })
+    }
 
-	componentWillMount() {
+    componentWillMount() {
 
-	}
+    }
 
+    render() {
 
-	render() {
+        function PreviewBtn(props) {
+            return null
+        }
+        let PopoverStyle = {
+            textAlign: 'center',
+            paddingBottom: '1em'
+        }
 
+        let quiz = this.state.quiz;
 
-		function PreviewBtn(props) {
-			return null
-		}
-		let PopoverStyle = {
-			textAlign: 'center', paddingBottom: '1em'
-		}
-
-		let quiz = this.state.quiz;
-
-
-		//ReTurn
-		return (
-			<div>
+        //ReTurn
+        return (
+            <div>
 				<div style={{ textAlign: 'center' }}>
 					{quiz.question.length > 0 && quiz.answer.length > 0 
 						&& quiz.answer2.length > 0 && quiz.answer3.length >
@@ -97,7 +95,7 @@ export default class CreateQuiz extends Component {
 									dangerouslySetInnerHTML={{ __html: this.state.quiz.question }} />} >
 									<Button className="animated fadeInUp" 
 									onMouseOver={this.getQuestionHtml}
-										type="dashed" icon="search">Xem trước</Button></Popover> :
+										type="primary" icon="search">Xem trước</Button></Popover> :
 								<PreviewBtn />}</div>
 
 							<div onClick={this.getQuestionHtml} onKeyUp={this.getQuestionHtml}  >
@@ -111,7 +109,7 @@ export default class CreateQuiz extends Component {
 								<Popover placement='bottom' content={<div id='answer_popover'
 									dangerouslySetInnerHTML={{ __html: this.state.quiz.answer }} />} >
 									<Button className="animated fadeInUp" onMouseOver={this.getAnswerHtml}
-										type="dashed" icon="search">Xem trước</Button></Popover> :
+										type="primary" icon="search">Xem trước</Button></Popover> :
 								<PreviewBtn />}</div>
 
 							<div onClick={this.getAnswerHtml} onKeyUp={this.getAnswerHtml}  >
@@ -125,7 +123,7 @@ export default class CreateQuiz extends Component {
 								<Popover placement='bottom' content={<div id='answer2_popover'
 									dangerouslySetInnerHTML={{ __html: this.state.quiz.answer2 }} />} >
 									<Button className="animated fadeInUp" onMouseOver={this.getAnswer2Html}
-										type="dashed" icon="search">Xem trước</Button></Popover> :
+										type="primary" icon="search">Xem trước</Button></Popover> :
 								<PreviewBtn />}</div>
 
 							<div onClick={this.getAnswer2Html} onKeyUp={this.getAnswer2Html}  >
@@ -138,7 +136,7 @@ export default class CreateQuiz extends Component {
 								<Popover placement='bottom' content={<div id='answer3_popover'
 									dangerouslySetInnerHTML={{ __html: this.state.quiz.answer3 }} />} >
 									<Button className="animated fadeInUp" onMouseOver={this.getAnswer3Html}
-										type="dashed" icon="search">Xem trước</Button></Popover> :
+										type="primary" icon="search">Xem trước</Button></Popover> :
 								<PreviewBtn />}</div>
 
 							<div onClick={this.getAnswer3Html} onKeyUp={this.getAnswer3Html}  >
@@ -151,7 +149,7 @@ export default class CreateQuiz extends Component {
 								<Popover placement='bottom' content={<div id='answer4_popover'
 									dangerouslySetInnerHTML={{ __html: this.state.quiz.answer4 }} />} >
 									<Button className="animated fadeInUp" onMouseOver={this.getAnswer4Html}
-										type="dashed" icon="search">Xem trước</Button></Popover> :
+										type="primary" icon="search">Xem trước</Button></Popover> :
 								<PreviewBtn />}</div>
 
 							<div onClick={this.getAnswer4Html}  onKeyUp={this.getAnswer4Html}  >
@@ -165,7 +163,7 @@ export default class CreateQuiz extends Component {
 								<Popover placement='bottom' content={<div id='hint_popover'
 									dangerouslySetInnerHTML={{ __html: this.state.quiz.hint }} />} >
 									<Button className="animated fadeInUp" onMouseOver={this.getHintHtml}
-										type="dashed" icon="search">Xem trước</Button></Popover> :
+										type="primary" icon="search">Xem trước</Button></Popover> :
 								<PreviewBtn />}</div>
 
 
@@ -180,7 +178,7 @@ export default class CreateQuiz extends Component {
 								<Popover placement='bottom' content={<div id='slove_popover'
 									dangerouslySetInnerHTML={{ __html: this.state.quiz.slove }} />} >
 									<Button className="animated fadeInUp" onMouseOver={this.getSloveHtml}
-										type="dashed" icon="search">Xem trước</Button></Popover> :
+										type="primary" icon="search">Xem trước</Button></Popover> :
 								<PreviewBtn />}</div>
 
 							<div onClick={this.getSloveHtml} onKeyUp={this.getSloveHtml}  >
@@ -190,8 +188,7 @@ export default class CreateQuiz extends Component {
 					</Tabs>
 				</div>
 			</div>
-		);
-	}
+        );
+    }
 
-
-} 
+}

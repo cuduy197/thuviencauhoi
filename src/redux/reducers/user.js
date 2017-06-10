@@ -1,5 +1,5 @@
 import * as types from '../constants'
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import { configFirebase, ParseAppID, ParseServerURL } from '../config';
 import * as Parse from 'parse';
 
