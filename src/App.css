@@ -33,6 +33,9 @@ body {
     padding: 2.5em;
 }
 
+.center {
+    text-align: center !important;
+}
 
 /*
 .___  ___.   ______   .______    __   __       _______ 
