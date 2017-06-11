@@ -1,22 +1,17 @@
-export const INCREASE = 'INCREASE'
-export const DECREASE = 'DECREASE'
-export const SHOW_HELLO = 'SHOW_HELLO'
-
+export const INIT = 'INIT' // x
+    //auth
+export const ON_AUTH_CHANGED = 'ON_AUTH_CHANGED' // x
 export const LOGIN = 'LOGIN' // x
 export const LOGOUT = 'LOGOUT' // x
-
-export const INIT = 'INIT' // x
-
-export const CHECK_AUTH = 'CHECK_AUTH' // x
-
-export const GET_USER_DATA = 'GET_USER_DATA' // x
-
-export const ADD_QUIZ = 'ADD_QUIZ';
+    //quiz
+export const ADD_QUIZ = 'ADD_QUIZ'; // x
 export const EDIT_QUIZ = 'EDIT_QUIZ';
 export const DELETE_QUIZ = 'DELETE_QUIZ';
 export const VIEW_QUIZ = 'VIEW_QUIZ';
 
-export const ADD_QUIZ_DONE = 'ADD_QUIZ_DONE';
-export const EDIT_QUIZ_DONE = 'EDIT_QUIZ_DONE';
-export const DELETE_QUIZ_DONE = 'DELETE_QUIZ_DONE';
-export const VIEW_QUIZ_DONE = 'VIEW_QUIZ_DONE';
+export const ADD_QUIZ_RESULT = 'ADD_QUIZ_RESULT'; // x
+export const EDIT_QUIZ_RESULT = 'EDIT_QUIZ_RESULT';
+export const DELETE_QUIZ_RESULT = 'DELETE_QUIZ_RESULT';
+export const VIEW_QUIZ_RESULT = 'VIEW_QUIZ_RESULT';
+
+//12/6/2017

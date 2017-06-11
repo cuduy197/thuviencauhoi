@@ -2,14 +2,14 @@ import { store } from '../store';
 import { delay } from 'redux-saga';
 import * as types from '../constants'
 
-export function* GET_USER_DATA() {
+export function onAuthStateChanged() {
 
     //Auth
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            console.log('You are login!')
+            console.log('Chào: ' + user.displayName)
             store.dispatch({
-                type: types.GET_USER_DATA,
+                type: types.ON_AUTH_CHANGED,
                 payload: {
                     islogin: true,
                     userData: {
@@ -23,9 +23,10 @@ export function* GET_USER_DATA() {
             })
 
         } else {
+            console.log('Bạn chưa đăng nhập !');
 
             store.dispatch({
-                type: types.GET_USER_DATA,
+                type: types.ON_AUTH_CHANGED,
                 payload: {
                     islogin: false,
                     userData: {
@@ -37,12 +38,10 @@ export function* GET_USER_DATA() {
                     }
                 }
             })
-            console.log('You are unlogin!')
         }
 
     });
 
-    yield delay(1000);
-    console.log('GET_USER_DATA DONE! ');
+    console.log('onAuthStateChanged!');
 
 }

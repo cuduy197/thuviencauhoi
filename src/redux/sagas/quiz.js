@@ -9,23 +9,23 @@ const confirm = Modal.confirm;
 export function* watch_QUIZ_ACTIONS() {
 
     yield takeLatest(types.ADD_QUIZ, (action) => {
-        console.log(action.payload)
+        //console.log(action.payload)
         let p = action.payload;
         let _cauhoi = Parse.Object.extend(`${p.monhoc}_${p.chude}`);
         let cauhoi = new _cauhoi();
 
         cauhoi.set(action.payload.quiz);
-        cauhoi.save(null, {
-            success: (cauhoi) => {
+
+        cauhoi.save()
+            .then(cauhoi => {
                 notification.success({ message: 'Đã tạo câu hỏi  ', description: 'ID câu hỏi : ' + cauhoi.id });
-                store.dispatch({ type: types.ADD_QUIZ_DONE, payload: true });
-            },
-            error: (cauhoi, error) => {
-                message.error('Đã có lỗi!');
-                store.dispatch({ type: types.ADD_QUIZ_DONE, payload: false });
+                store.dispatch({ type: types.ADD_QUIZ_RESULT, payload: true });
+            })
+            .catch(error => {
+                message.error('Đã có lỗi ! [ ' + error.code + ' ]');
+                store.dispatch({ type: types.ADD_QUIZ_RESULT, payload: false });
                 console.error('Failed to create new object, with error code: ' + error.message + '\nCode: ' + error.code);
-            }
-        });
+            })
 
     })
 

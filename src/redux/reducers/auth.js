@@ -3,7 +3,7 @@ import * as types from '../constants'
 import { Modal, Button } from 'antd';
 const confirm = Modal.confirm;
 
-const initialState = {
+export const authDefaultState = {
     islogin: null,
     userData: {
         name: 'Đang tải',
@@ -14,10 +14,10 @@ const initialState = {
     }
 }
 
-export default function user(state = initialState, action) {
+export default function(state = authDefaultState, action) {
     switch (action.type) {
 
-        case types.GET_USER_DATA:
+        case types.ON_AUTH_CHANGED:
             //console.log(action.payload)
             state.userData = action.payload.userData;
             state.islogin = action.payload.islogin;
@@ -28,6 +28,7 @@ export default function user(state = initialState, action) {
             var provider = new firebase.auth.FacebookAuthProvider();
             firebase.auth().signInWithRedirect(provider);
             return {...state }
+
         case types.LOGOUT:
             confirm({
                 title: 'Bạn có muốn đăng xuất ? ',
@@ -41,6 +42,7 @@ export default function user(state = initialState, action) {
                 }
             });
             return {...state }
+
         default:
             return state;
     }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import './index.less';
 import App from './App';
-import NavBar from './components/ui/nav/NavBar';
+import NavBar from './components/NavBar/NavBar.jsx';
 import { LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
 

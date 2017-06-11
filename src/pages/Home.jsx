@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { login, logout } from '../redux/actions/user';
+import { login, logout } from '../redux/actions/auth';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Button, Spin, Icon } from 'antd';
@@ -10,9 +10,8 @@ class Home extends Component {
         loading: false,
     }
 
-    enterLoading = () => {
+    call_login = () => {
         this.setState({ loading: true });
-
         this.props.login();
     }
 
@@ -43,9 +42,9 @@ class Home extends Component {
 				</div>
 				:
 				 <div className='center'>
-				  <h1  className='animated flipInX'>Chào mừng bạn đến Thư viện câu hỏi</h1>
+				  <h1  className='animated flipInX'>Chào mừng bạn đến <u>Thư viện câu hỏi</u> <br/> </h1>
 				  <br />
-				<Button loading={this.state.loading} type="primary" size="large" onClick={this.enterLoading}>Đăng nhập</Button>
+				<Button loading={this.state.loading} type="primary" size="large" onClick={this.call_login}>Đăng nhập</Button>
 				 </div>
 				}
 			</div>
@@ -57,7 +56,7 @@ export default withRouter(
     connect(
         state => ({
             state: state,
-            userData: state.user.userData,
-            islogin: state.user.islogin
+            userData: state.auth.userData,
+            islogin: state.auth.islogin
         }), { login, logout }
     )(Home))

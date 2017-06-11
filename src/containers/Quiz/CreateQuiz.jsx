@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { add_quiz } from '../../../redux/actions/quiz';
+import { add_quiz } from '../../redux/actions/quiz';
 
 import Editor from './Editor.jsx';
 
@@ -21,7 +21,7 @@ class CreateQuiz extends Component {
         this.getHintHtml = this.getHintHtml.bind(this);
         this.getSloveHtml = this.getSloveHtml.bind(this);
 
-        this.ADD_QUIZ = this.ADD_QUIZ.bind(this);
+        this.call_add_quiz = this.call_add_quiz.bind(this);
         this.state = {
             loading: false,
             done: false,
@@ -42,21 +42,9 @@ class CreateQuiz extends Component {
         //console.log(this.props.state.router.location.pathname);
     }
 
-    ADD_QUIZ() {
-        console.log('add_quiz action!');
-        this.setState({ loading: true });
-
-        let quiz = this.state.quiz;
-        let pathname = this.props.state.router.location.pathname.split('/');
-        let monhoc = pathname[2];
-        let chude = pathname[3]
-            //add quiz
-        this.props.add_quiz({ quiz, monhoc, chude });
-
-    }
     componentWillReceiveProps(nextProps) {
         //nextProps - giá trị props mới khi reducer return!!!!!
-        this.setState({ quiz: {...this.state.quiz, author: nextProps.state.user.userData.name } })
+        this.setState({ quiz: {...this.state.quiz, author: nextProps.state.auth.userData.name } })
             //Set author
 
         this.setState({ loading: this.props.state.quiz.loading })
@@ -69,11 +57,11 @@ class CreateQuiz extends Component {
             answer4: '',
             hint: '',
             slove: '',
-            author: nextProps.state.user.userData.name
+            author: nextProps.state.auth.userData.name
         }
 
-        console.log(nextProps.state.quiz.done);
-        console.log(nextProps);
+        //console.log(nextProps.state.quiz.done);
+        //console.log(nextProps);
         if (nextProps.state.quiz.done === true) {
             console.log('Done!');
             this.setState({ quiz: resetQuiz })
@@ -81,6 +69,20 @@ class CreateQuiz extends Component {
                 $(`#${i}`).froalaEditor('html.set', '');
             }
         }
+    }
+
+    call_add_quiz() {
+        console.log('call_add_quiz');
+
+        this.setState({ loading: true });
+
+        let quiz = this.state.quiz;
+        let pathname = this.props.state.router.location.pathname.split('/');
+        let monhoc = pathname[2];
+        let chude = pathname[3]
+            //add quiz
+        this.props.add_quiz({ quiz, monhoc, chude });
+
     }
 
     getQuestionHtml() {
@@ -126,7 +128,7 @@ class CreateQuiz extends Component {
 
 				<div style={{ textAlign: 'center' }}>
 				{process.env.NODE_ENV === "development"&& <div>
-				<Button  onClick={this.ADD_QUIZ}
+				<Button  onClick={this.call_add_quiz}
 				loading={this.state.loading} 
 				className="animated fadeInDown" icon="edit" 
 				size="large"  type="primary">Tạo câu hỏi (TEST) </Button> 
@@ -137,7 +139,7 @@ class CreateQuiz extends Component {
 						&& quiz.answer2.length > 0 && quiz.answer3.length >
 						 0 && quiz.answer4.length > 0
 						?
-						<Button onClick={this.ADD_QUIZ}
+						<Button onClick={this.call_add_quiz}
 						loading={this.state.loading}
 						className="animated fadeInDown" icon="edit" size="large" 
 						style={{ backgroundColor: 'lightgreen', color: 'black' }}>Tạo câu hỏi</Button> 

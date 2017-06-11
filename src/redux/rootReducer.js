@@ -2,16 +2,12 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 //Reducer
-import count from './count';
-import user from './user';
-import quiz from './quiz';
-
-//mport theDefaultReducer, { firstNamedReducer, secondNamedReducer } from './hello';
+import auth from './reducers/auth';
+import quiz from './reducers/quiz';
 
 const rootReducer = combineReducers({
-    user,
+    auth,
     quiz,
-    //count,
     router: routerReducer
 })
 

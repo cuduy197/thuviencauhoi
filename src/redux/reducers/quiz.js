@@ -5,15 +5,13 @@ const defaultState = {
     done: null
 };
 
-const quiz = (state = defaultState, action) => {
+export default function(state = defaultState, action) {
     switch (action.type) {
-        case types.ADD_QUIZ_DONE:
-            console.log('add quiz done!')
-            console.log(action.payload);
+        case types.ADD_QUIZ_RESULT:
             return {...state, done: action.payload, loading: false, }
+        case 'QUIZ_TEST':
+            return state
         default:
             return state;
     }
 };
-
-export default quiz;
