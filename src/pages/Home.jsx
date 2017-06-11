@@ -35,7 +35,7 @@ class Home extends Component {
 				<h1>bạn muốn ... </h1>
 				<br />
 				<div > 
-				<Link to='home' > <Button icon="edit" type="primary" size="large">Tạo câu hỏi</Button>  </Link> <br/><br/>
+				<Link to='add/toan/hamso' > <Button icon="edit" type="primary" size="large">Tạo câu hỏi</Button>  </Link> <br/><br/>
 				<Link to='home' > <Button icon="sync" type="primary" size="large">Xem, cập nhật câu hỏi</Button>  </Link> <br/><br/>
 				<Link to='home' > <Button icon="solution" type="primary" size="large">Thống kê</Button>  </Link>  <br/><br/><br/><br/>
 				<Button  icon="disconnect"  onClick={()=> state.logout()}>Đăng xuất</Button><br /><br />

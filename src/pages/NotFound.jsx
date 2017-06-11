@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { push } from 'react-router-redux';
+import { store } from '../redux/store';
 
-const NotFound = ({ className }) => {
-    return (
-        <div className="center animated tada"> 
-        	<h1> Not Found! </h1>
+class NotFound extends Component {
+
+    componentDidMount() {
+        setTimeout(function() {
+            //window.location.pathname = '/'
+            store.dispatch(push('/'))
+        }, 2000);
+    }
+
+    render() {
+        return (
+            <div className="center animated bounceInDown"> 
+        	<h1> Trang không tồn tại! </h1>
+        	<br/>
+        	<h3 className="center animated infinite flash"> Đang chuyển về trang chủ ... </h3>
         </div>
-    );
-};
+        );
+    }
+}
 
 export default NotFound;

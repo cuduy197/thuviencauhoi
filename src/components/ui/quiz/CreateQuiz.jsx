@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { add_quiz } from '../../../redux/actions/quiz';
 
 import Editor from './Editor.jsx';
-import { Button, Tabs, Icon, Popover } from 'antd';
+
+import { Button, Tabs, Icon, Popover, Spin } from 'antd';
 const TabPane = Tabs.TabPane;
 
-export default class CreateQuiz extends Component {
+class CreateQuiz extends Component {
 
     constructor(props) {
         super(props);
@@ -17,7 +21,10 @@ export default class CreateQuiz extends Component {
         this.getHintHtml = this.getHintHtml.bind(this);
         this.getSloveHtml = this.getSloveHtml.bind(this);
 
+        this.ADD_QUIZ = this.ADD_QUIZ.bind(this);
         this.state = {
+            loading: false,
+            done: false,
             quiz: {
                 question: '',
                 answer: '',
@@ -25,12 +32,56 @@ export default class CreateQuiz extends Component {
                 answer3: '',
                 answer4: '',
                 hint: '',
-                slove: ''
+                slove: '',
+                author: ''
             }
         }
     }
 
-    componentDidMount() {}
+    componentDidMount() {
+        //console.log(this.props.state.router.location.pathname);
+    }
+
+    ADD_QUIZ() {
+        console.log('add_quiz action!');
+        this.setState({ loading: true });
+
+        let quiz = this.state.quiz;
+        let pathname = this.props.state.router.location.pathname.split('/');
+        let monhoc = pathname[2];
+        let chude = pathname[3]
+            //add quiz
+        this.props.add_quiz({ quiz, monhoc, chude });
+
+    }
+    componentWillReceiveProps(nextProps) {
+        //nextProps - giá trị props mới khi reducer return!!!!!
+        this.setState({ quiz: {...this.state.quiz, author: nextProps.state.user.userData.name } })
+            //Set author
+
+        this.setState({ loading: this.props.state.quiz.loading })
+
+        let resetQuiz = {
+            question: '',
+            answer: '',
+            answer2: '',
+            answer3: '',
+            answer4: '',
+            hint: '',
+            slove: '',
+            author: nextProps.state.user.userData.name
+        }
+
+        console.log(nextProps.state.quiz.done);
+        console.log(nextProps);
+        if (nextProps.state.quiz.done === true) {
+            console.log('Done!');
+            this.setState({ quiz: resetQuiz })
+            for (let i in resetQuiz) {
+                $(`#${i}`).froalaEditor('html.set', '');
+            }
+        }
+    }
 
     getQuestionHtml() {
         this.setState({ quiz: {...this.state.quiz, question: this.question.getHtml() } })
@@ -57,10 +108,6 @@ export default class CreateQuiz extends Component {
         this.setState({ quiz: {...this.state.quiz, slove: this.slove.getHtml() } })
     }
 
-    componentWillMount() {
-
-    }
-
     render() {
 
         function PreviewBtn(props) {
@@ -76,14 +123,28 @@ export default class CreateQuiz extends Component {
         //ReTurn
         return (
             <div>
+
 				<div style={{ textAlign: 'center' }}>
+				{process.env.NODE_ENV === "development"&& <div>
+				<Button  onClick={this.ADD_QUIZ}
+				loading={this.state.loading} 
+				className="animated fadeInDown" icon="edit" 
+				size="large"  type="primary">Tạo câu hỏi (TEST) </Button> 
+				<br/> <br/>  
+				</div>}
+
 					{quiz.question.length > 0 && quiz.answer.length > 0 
 						&& quiz.answer2.length > 0 && quiz.answer3.length >
 						 0 && quiz.answer4.length > 0
 						?
-						<Button className="animated fadeInDown" icon="edit" size="large" 
+						<Button onClick={this.ADD_QUIZ}
+						loading={this.state.loading}
+						className="animated fadeInDown" icon="edit" size="large" 
 						style={{ backgroundColor: 'lightgreen', color: 'black' }}>Tạo câu hỏi</Button> 
-						:   <Button  className="animated fadeInDown" icon="edit" size="large"  type="dashed" disabled>Tạo câu hỏi</Button>}
+						: 
+				  <Button title="Hãy nhập nội dung câu hỏi và các câu trả lời để tạo câu hỏi"
+				  className="animated fadeInDown"
+				   icon="edit" size="large"  type="dashed" disabled>Tạo câu hỏi</Button>}
 				</div>
 				<div className="padding-container">
 					<Tabs type="line" defaultActiveKey="1">
@@ -192,3 +253,8 @@ export default class CreateQuiz extends Component {
     }
 
 }
+
+export default withRouter(
+    connect(
+        state => ({ state }), { add_quiz }
+    )(CreateQuiz))

@@ -27,6 +27,7 @@ ReactDOM.render(
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route path="/home" component={App} />
+					<Route exact strict path="/add/:monhoc/:chude" component={App} />
 					<Route path="/test/:id" component={Home} />
 					<Route component={NotFound} />
 				</Switch>

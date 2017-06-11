@@ -25,6 +25,11 @@ const store = createStore(
     applyMiddleware(middleware, sagaMiddleware)
 )
 
+//Debug
+if (process.env.NODE_ENV == 'development') {
+    window.store = store;
+}
+
 //SAGA RUNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 sagaMiddleware.run(rootSaga);
 
