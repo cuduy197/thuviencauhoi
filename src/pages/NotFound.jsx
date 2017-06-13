@@ -13,7 +13,7 @@ class NotFound extends Component {
 
     render() {
         return (
-            <div className="center animated bounceInDown"> 
+            <div className="center animated bounceInUp"> 
         	<h1> Trang không tồn tại! </h1>
         	<br/>
         	<h3 className="center animated infinite flash"> Đang chuyển về trang chủ ... </h3>

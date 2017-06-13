@@ -1,6 +1,6 @@
-import * as types from '../constants'
+import { ON_AUTH_CHANGED, AUTH_LOGIN, AUTH_LOGOUT } from '../actions/_type';
 
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 const confirm = Modal.confirm;
 
 export const authDefaultState = {
@@ -17,19 +17,17 @@ export const authDefaultState = {
 export default function(state = authDefaultState, action) {
     switch (action.type) {
 
-        case types.ON_AUTH_CHANGED:
-            //console.log(action.payload)
-            state.userData = action.payload.userData;
-            state.islogin = action.payload.islogin;
-            return {...state, islogin: state.islogin, userData: state.userData } //ADD user data to state
+        case ON_AUTH_CHANGED:
+            state.islogin = action.payload;
+            return {...state, islogin: state.islogin } //ADD user data to state
 
-        case types.LOGIN:
+        case AUTH_LOGIN:
             console.log('LOGIN');
             var provider = new firebase.auth.FacebookAuthProvider();
             firebase.auth().signInWithRedirect(provider);
             return {...state }
 
-        case types.LOGOUT:
+        case AUTH_LOGOUT:
             confirm({
                 title: 'Bạn có muốn đăng xuất ? ',
                 onOk() {

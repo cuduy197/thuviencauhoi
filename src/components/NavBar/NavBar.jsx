@@ -51,7 +51,7 @@ export default class NavBar extends React.Component {
 				       
 				mode="horizontal">
 				<Menu.Item key="homepage">
-					<Link to="/">Trang chủ <Icon type="home" /></Link>
+					<Link to="/">Trang chủ `alpha`<Icon type="home" /></Link>
 				</Menu.Item>
 			  <Menu.Item key="guide">
 					<Link to="/huongdan">Hướng dẫn <Icon type="question-circle-o" /></Link>

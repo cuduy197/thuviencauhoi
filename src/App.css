@@ -37,6 +37,7 @@ body {
     text-align: center !important;
 }
 
+
 /*
 .___  ___.   ______   .______    __   __       _______ 
 |   \/   |  /  __  \  |   _  \  |  | |  |     |   ____|
@@ -59,10 +60,12 @@ body {
     }
 }
 
-td {
+
+/*td {
     text-align: left;
     border: 1px solid rebeccapurple;
 }
+*/
 
 
 /*

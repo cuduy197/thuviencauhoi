@@ -1,8 +1,14 @@
-import * as types from '../constants'
+import * as types from './_type'
+import { store } from '../store';
 
-export function add_quiz(payload) {
+export function quiz_add(payload) {
     return {
-        type: types.ADD_QUIZ,
+        type: types.QUIZ_ADD,
         payload
     }
+}
+
+export function quiz_error(error) {
+    store.dispatch({ type: types.QUIZ_ERROR, error });
+
 }

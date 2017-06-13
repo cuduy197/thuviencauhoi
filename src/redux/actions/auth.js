@@ -1,13 +1,13 @@
-import * as types from '../constants'
+import { AUTH_LOGIN, AUTH_LOGOUT } from './_type'
 
-export function login() {
+export function auth_login() {
     return {
-        type: types.LOGIN
+        type: AUTH_LOGIN
     }
 }
 
-export function logout() {
+export function auth_logout() {
     return {
-        type: types.LOGOUT
+        type: AUTH_LOGOUT
     }
 }

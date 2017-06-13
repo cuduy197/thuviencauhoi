@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 import { take } from 'redux-saga/effects'
 
 import { INIT } from './sagas/init';
-import { onAuthStateChanged } from './sagas/auth';
+import { watch_AUTH_CHANGED } from './sagas/auth';
 import { watch_QUIZ_ACTIONS } from './sagas/quiz';
 
 function* logActions() {
@@ -23,7 +23,7 @@ function* logTest() {
 export default function* rootSaga() {
     yield all([
         INIT(),
-        onAuthStateChanged(),
+        watch_AUTH_CHANGED(),
         watch_QUIZ_ACTIONS(),
         logActions(),
         logTest()

@@ -1,4 +1,5 @@
-import * as types from '../constants'
+import * as types from '../actions/_type'
+import { quiz_error } from '../actions/quiz';
 import { delay } from 'redux-saga'
 import { put, call, takeEvery, takeLatest, all, take } from 'redux-saga/effects';
 import { store } from '../store';
@@ -8,7 +9,7 @@ const confirm = Modal.confirm;
 
 export function* watch_QUIZ_ACTIONS() {
 
-    yield takeLatest(types.ADD_QUIZ, (action) => {
+    yield takeLatest(types.QUIZ_ADD, (action) => {
         //console.log(action.payload)
         let p = action.payload;
         let _cauhoi = Parse.Object.extend(`${p.monhoc}_${p.chude}`);
@@ -17,15 +18,11 @@ export function* watch_QUIZ_ACTIONS() {
         cauhoi.set(action.payload.quiz);
 
         cauhoi.save()
-            .then(cauhoi => {
-                notification.success({ message: 'Đã tạo câu hỏi  ', description: 'ID câu hỏi : ' + cauhoi.id });
-                store.dispatch({ type: types.ADD_QUIZ_RESULT, payload: true });
+            .then(result => {
+                notification.success({ message: 'Đã tạo câu hỏi  ', description: 'ID câu hỏi : ' + result.id });
+                store.dispatch({ type: types.QUIZ_ADD_RESULT, payload: true });
             })
-            .catch(error => {
-                message.error('Đã có lỗi ! [ ' + error.code + ' ]');
-                store.dispatch({ type: types.ADD_QUIZ_RESULT, payload: false });
-                console.error('Failed to create new object, with error code: ' + error.message + '\nCode: ' + error.code);
-            })
+            .catch(code => { quiz_error(code) })
 
     })
 

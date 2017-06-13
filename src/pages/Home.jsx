@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { login, logout } from '../redux/actions/auth';
+import { auth_login, auth_logout } from '../redux/actions/auth';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Button, Spin, Icon } from 'antd';
@@ -12,7 +12,7 @@ class Home extends Component {
 
     call_login = () => {
         this.setState({ loading: true });
-        this.props.login();
+        this.props.auth_login();
     }
 
     render() {
@@ -24,12 +24,12 @@ class Home extends Component {
 
         //HTML
         return (
-            <div className="animated fadeIn">
+            <div className="animated fadeInUp">
         {islogin===null ?  <div style={{paddingTop : '5em'}}> <Spin tip="Đang tải dữ liệu..." size="large"> </Spin> </div> : 
 				islogin ? 
 				<div className='center'> 
 				<h1>Chào: <u style={{color: 'purple'}} >{userData.name} </u> </h1> 
-				<h1>chúc bạn một ngày tốt lành <span style={{color: 'green'}} role="img" aria-label='lucky'>🍀</span></h1>
+				<h1> chúc bạn một ngày tốt lành <span style={{color: 'green'}} role="img" aria-label='lucky'>🍀</span></h1>
 				<br />	<br />	<br />
 				<h1>bạn muốn ... </h1>
 				<br />
@@ -37,7 +37,7 @@ class Home extends Component {
 				<Link to='add/toan/hamso' > <Button icon="edit" type="primary" size="large">Tạo câu hỏi</Button>  </Link> <br/><br/>
 				<Link to='home' > <Button icon="sync" type="primary" size="large">Xem, cập nhật câu hỏi</Button>  </Link> <br/><br/>
 				<Link to='home' > <Button icon="solution" type="primary" size="large">Thống kê</Button>  </Link>  <br/><br/><br/><br/>
-				<Button  icon="disconnect"  onClick={()=> state.logout()}>Đăng xuất</Button><br /><br />
+				<Button  icon="disconnect"  onClick={()=> state.auth_logout()}>Đăng xuất</Button><br /><br />
 				</div>
 				</div>
 				:
@@ -56,7 +56,7 @@ export default withRouter(
     connect(
         state => ({
             state: state,
-            userData: state.auth.userData,
+            userData: state.user,
             islogin: state.auth.islogin
-        }), { login, logout }
+        }), { auth_login, auth_logout }
     )(Home))
