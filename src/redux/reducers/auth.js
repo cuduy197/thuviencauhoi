@@ -19,10 +19,11 @@ export default function(state = authDefaultState, action) {
 
         case ON_AUTH_CHANGED:
             state.islogin = action.payload;
-            return {...state, islogin: state.islogin } //ADD user data to state
+            return {...state, islogin: state.islogin }
 
         case AUTH_LOGIN:
             console.log('LOGIN');
+            //Firebase
             var provider = new firebase.auth.FacebookAuthProvider();
             firebase.auth().signInWithRedirect(provider);
             return {...state }

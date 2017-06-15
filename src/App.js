@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
+
+//Content
+import AppContent from './AppContent.jsx';
+
+//UI, Lang
+import './index.less';
 import './App.css';
-import NavBar from './components/NavBar/NavBar.jsx';
-import CreateQuiz from './containers/Quiz/CreateQuiz.jsx';
+import { LocaleProvider } from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
+
+//Store 
+import { store, history } from './redux/store.js';
+import { Provider, connect } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 export default class App extends Component {
     render() {
         return (
-            <div className="App animated fadeIn">
-				<CreateQuiz />
-			</div >
+            <LocaleProvider locale={enUS}>
+						    <Provider store={store}>
+								<ConnectedRouter history={history}>
+										<AppContent />
+								</ConnectedRouter>
+							</Provider>
+						</LocaleProvider>
         );
     }
 }

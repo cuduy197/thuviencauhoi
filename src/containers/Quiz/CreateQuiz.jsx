@@ -42,13 +42,16 @@ class CreateQuiz extends Component {
     }
 
     componentDidMount() {
-        //console.log(this.props.state.router.location.pathname);
 
         this.setState({ check: false })
 
     }
 
     componentWillReceiveProps(nextProps) {
+
+        /*if (!nextProps.state.auth.islogin) {
+            window.location.href = '/'
+        }*/
         //nextProps - giá trị props mới khi reducer return!!!!!
         this.setState({ loading: false })
         this.setState({ quiz: {...this.state.quiz, author: nextProps.state.user.name, author_id: nextProps.state.user.id } })
