@@ -31,10 +31,19 @@ body {
 
 .padding-container {
     padding: 2.5em;
+    transition: all 0.5s linear 0s;
 }
 
 .center {
     text-align: center !important;
+}
+
+.card-quiz {
+    padding: 0 10em 1em 10em;
+}
+
+.editor {
+    margin: 1em;
 }
 
 
@@ -48,6 +57,12 @@ body {
                                                        */
 
 @media only screen and (max-width: 500px) {
+    .editor {
+        margin: 0em;
+    }
+    .card-quiz {
+        padding: 0.2em;
+    }
     .mobile,
     .medium {
         display: block;
@@ -56,7 +71,7 @@ body {
         display: none !important;
     }
     .padding-container {
-        padding: 0.2em;
+        margin: 0.5em;
     }
 }
 

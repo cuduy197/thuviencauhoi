@@ -1,8 +1,7 @@
-export const ParseAppID = 'hoctot';
-export const ParseServerURL = 'http://hosata.com/parse';
+export const ParseAppID = 'cunghoctot';
+export const ParseServerURL = 'http://35.185.176.28:1337/parse';
 
 export const configFirebase = {
-    apiKey: "AIzaSyCGgvspOWw5Z0EgMo72cfklntoVpXPuAhA",
-    authDomain: "thuviencauhoi2017.firebaseapp.com",
-    projectId: "thuviencauhoi2017",
+  apiKey: "AIzaSyBYlx5vhfo7tcjs0tkcsySNHASlgysfVYU",
+  authDomain: "react-easy-spa-17.firebaseapp.com"
 }

@@ -6,25 +6,28 @@ import AppContent from './AppContent.jsx';
 //UI, Lang
 import './index.less';
 import './App.css';
+
+
 import { LocaleProvider } from 'antd';
-import enUS from 'antd/lib/locale-provider/en_US';
+import viVN from 'antd/lib/locale-provider/vi_VN';
 
 //Store 
 import { store, history } from './redux/store.js';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import { Route, Switch, withRouter } from 'react-router-dom';
 
-export default class App extends Component {
+
+
+   export default class App extends Component {
     render() {
         return (
-            <LocaleProvider locale={enUS}>
+            <LocaleProvider locale={viVN}>
 						    <Provider store={store}>
 								<ConnectedRouter history={history}>
 										<AppContent />
 								</ConnectedRouter>
 							</Provider>
-						</LocaleProvider>
+			</LocaleProvider>
         );
     }
 }

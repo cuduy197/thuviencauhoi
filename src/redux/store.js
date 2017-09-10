@@ -14,21 +14,21 @@ const sagaMiddleware = createSagaMiddleware();
 
 const history = createHistory();
 const routerHistory = routerMiddleware(history);
-// Now you can dispatch navigation actions from anywhere!
-//store.dispatch(push('/home'))
+
+//store.dispatch(push('/home')) //  Now you can dispatch navigation actions from anywhere!
 
 //STORE
 const store = createStore(
     rootReducer,
     applyMiddleware(routerHistory, sagaMiddleware)
 )
+//SAGA RUNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+sagaMiddleware.run(rootSaga);
 
 //Debug
 if (process.env.NODE_ENV == 'development') {
     window.store = store;
 }
 
-//SAGA RUNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-sagaMiddleware.run(rootSaga);
 
 export { store, history };
