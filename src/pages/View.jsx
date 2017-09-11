@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Card, Pagination, Button } from "antd";
+import { Card, Pagination, Button, Radio, Spin } from "antd";
 import { store } from "../redux/store.js";
+const RadioGroup = Radio.Group;
 
 class ViewQuiz extends Component {
   componentWillMount() {
@@ -22,10 +23,21 @@ class ViewQuiz extends Component {
     let { user } = this.props;
     return (
       <div className="center">
-        <Button onClick={() => store.dispatch({ type: "FETCH_QUIZ", mode: "all" })}>Tất cả</Button>{" "}
-        <Button onClick={() => store.dispatch({ type: "FETCH_QUIZ", mode: "me" })}>Của bạn</Button>{" "}
-        <Button onClick={() => store.dispatch({ type: "FETCH_QUIZ", mode: "custom" })}>Tác giả</Button> {" "}
-        <Button onClick={() => store.dispatch({ type: "FETCH_QUIZ", mode: "id" })}>ID</Button>
+        <RadioGroup name="radiogroup" defaultValue={1}>
+          <Radio onClick={() => store.dispatch({ type: "FETCH_QUIZ", mode: "all" })} value={1}>
+            Tất cả
+          </Radio>
+          <Radio onClick={() => store.dispatch({ type: "FETCH_QUIZ", mode: "me" })} value={2}>
+            Của bạn
+          </Radio>
+          <Radio onClick={() => store.dispatch({ type: "FETCH_QUIZ", mode: "custom" })} value={3}>
+            Tác giả
+          </Radio>
+          <Radio onClick={() => store.dispatch({ type: "FETCH_QUIZ", mode: "id" })} value={4}>
+            ID
+          </Radio>
+        </RadioGroup>
+
         <h2 style={{ marginTop: ".5em" }}>Số câu hỏi thử nghiệm hiện tại là : {total}</h2>
         <br />
         {total > 10 ? (
@@ -38,7 +50,8 @@ class ViewQuiz extends Component {
         ) : null}
         {this.props.quiz.ui.isLoading ? (
           <div>
-            <br /> <h1 className="animated infinite flash">Đang tải dữ dữ liệu ...</h1>{" "}
+            <Spin tip="Đang tải dữ dữ liệu" size="large" />
+            <br />
           </div>
         ) : null}
         <br />

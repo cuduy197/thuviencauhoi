@@ -49,7 +49,7 @@ export default class NavBar extends React.Component {
       <Menu onClick={this.handleClick} mode="horizontal">
         <Menu.Item key="homepage">
           <Link to="/">
-            Trang chủ<Icon type="home" />
+            Trang chủ <Icon type="home" />
           </Link>
         </Menu.Item>
         <Menu.Item key="guide">

@@ -79,10 +79,11 @@ class CreateQuiz extends Component {
 
   componentWillReceiveProps(nextProps) {
     //nextProps - giá trị props mới khi reducer return!!!!!
-    this.setState({ loading: false });
 
     if (nextProps.state.quiz.done === true) {
+      this.setState({ loading: false });
       console.log("quiz_add Done!");
+
       let resetQuiz = {
         question: "",
         answer1: "",
@@ -109,10 +110,17 @@ class CreateQuiz extends Component {
 
   call_quiz_add = () => {
     console.log("call_quiz_add");
-    console.log(this.props);
-    let quiz = this.state.quiz;
-
     this.setState({ loading: true });
+
+    let quiz = this.state.quiz;
+    for (var key in quiz) {
+      if (quiz.hasOwnProperty(key)) {
+        var element = quiz[key];
+        quiz[key] = String(element).normalize();
+        console.log(quiz[key]);
+      }
+    }
+
     if (this.state.edit) {
       let edit = window.location.pathname.split("/");
       this.props.quiz_add({ quiz, id: edit[2] });
@@ -164,19 +172,42 @@ class CreateQuiz extends Component {
   };
 
   render() {
+    let quiz = this.state.quiz;
+    let check = this.state.check;
+
     let WrapPopoverStyle = {
       textAlign: "center",
       paddingBottom: "1em"
     };
 
-    let quiz = this.state.quiz;
-    let check = this.state.check;
+    let ButtonStyle = {
+      position: "absolute",
+      top: "1%",
+      left: "0",
+      right:'0',
+      marginLeft: 'auto', 
+      marginRight: 'auto', 
+      width: '180px'
+    };
 
+    let CreateButtonStyle={} ;
+     (window.innerWidth > 400 ) ? (CreateButtonStyle=ButtonStyle ): (CreateButtonStyle= {
+      display:'block', 
+      position:'absolute', left: "0",
+     right:'0',
+     marginLeft: 'auto', 
+     marginRight: 'auto', 
+     width: '180px'})
     //ReTurn
     return (
       <div>
+
+      
+
+
         <div style={{ textAlign: "center" }}>
-          {quiz.question.length > 0 &&
+        
+        {quiz.question.length > 0 &&
           quiz.answer1.length > 0 &&
           quiz.answer2.length > 0 &&
           quiz.answer3.length > 0 &&
@@ -185,9 +216,10 @@ class CreateQuiz extends Component {
               onClick={this.call_quiz_add}
               loading={this.state.loading}
               className="animated fadeInDown"
+             
               icon="edit"
               size="large"
-              style={{ backgroundColor: "lightgreen", color: "black" }}>
+              style={{ CreateButtonStyle, backgroundColor: "lightgreen", color: "black" }}>
               {this.state.edit ? "Cập nhật" : "Tạo câu hỏi"}
             </Button>
           ) : (
@@ -197,19 +229,24 @@ class CreateQuiz extends Component {
               icon="edit"
               size="large"
               type="dashed"
+              style={CreateButtonStyle}
               disabled>
               {this.state.edit ? "Cập nhật" : "Tạo câu hỏi"}
             </Button>
           )}
-          <br /> <br />
-          <span>Hiển thị công thức toán </span>
+            <div>
+            {window.innerWidth<400 ? <div> <br/> <br/><br/></div>  : null}
+          <span>Hiển thị ký hiệu </span>
           <Switch checked={check} onChange={this.onSwitchChange} />
+          </div> 
         </div>
 
         <div className="padding-container">
           <Tabs
-            type="line"
+            className="center"
+            type="card"
             tabPosition={window.innerWidth > 400 ? "top" : "top"}
+            tabBarExtraContent={<div> </div>}
             onChange={tabs => {
               if (this.state.edit) {
                 switch (Number(tabs)) {
@@ -217,7 +254,7 @@ class CreateQuiz extends Component {
                     $(`#question`).froalaEditor("html.set", this.state.quiz.question);
                     break;
                   case 2:
-                    setTimeout(() => $(`#answer`).froalaEditor("html.set",this.state.quiz.answer1), 345);
+                    setTimeout(() => $(`#answer`).froalaEditor("html.set", this.state.quiz.answer1), 345);
                     break;
                   case 3:
                     setTimeout(() => $(`#answer2`).froalaEditor("html.set", this.state.quiz.answer2), 345);
@@ -251,7 +288,10 @@ class CreateQuiz extends Component {
                 </Col>
 
                 <Col sm={{ span: 24 }} lg={{ span: check ? 12 : 24 }}>
-                  <div className="animated fadeIn editor" onClick={this.getQuestionHtml} onKeyUp={this.getQuestionHtml}>
+                  <div
+                    className=" editor animated fadeIn"
+                    onClick={this.getQuestionHtml}
+                    onKeyUp={this.getQuestionHtml}>
                     <Editor
                       ref={r => {
                         this.question = r;
@@ -275,7 +315,7 @@ class CreateQuiz extends Component {
                 </Col>
 
                 <Col sm={{ span: 24 }} lg={{ span: check ? 12 : 24 }}>
-                  <div className="animated fadeIn editor" onClick={this.getAnswer1Html} onKeyUp={this.getAnswer1Html}>
+                  <div className=" editor animated fadeIn" onClick={this.getAnswer1Html} onKeyUp={this.getAnswer1Html}>
                     <Editor
                       ref={r => {
                         this.answer = r;
@@ -299,7 +339,7 @@ class CreateQuiz extends Component {
                 </Col>
 
                 <Col sm={{ span: 24 }} lg={{ span: check ? 12 : 24 }}>
-                  <div className="animated fadeIn editor" onClick={this.getAnswer2Html} onKeyUp={this.getAnswer2Html}>
+                  <div className=" editor animated fadeIn" onClick={this.getAnswer2Html} onKeyUp={this.getAnswer2Html}>
                     <Editor
                       ref={r => {
                         this.answer2 = r;
@@ -323,7 +363,7 @@ class CreateQuiz extends Component {
                 </Col>
 
                 <Col sm={{ span: 24 }} lg={{ span: check ? 12 : 24 }}>
-                  <div className="animated fadeIn editor" onClick={this.getAnswer3Html} onKeyUp={this.getAnswer3Html}>
+                  <div className=" editor animated fadeIn" onClick={this.getAnswer3Html} onKeyUp={this.getAnswer3Html}>
                     <Editor
                       ref={r => {
                         this.answer3 = r;
@@ -347,7 +387,7 @@ class CreateQuiz extends Component {
                 </Col>
 
                 <Col sm={{ span: 24 }} lg={{ span: check ? 12 : 24 }}>
-                  <div className="animated fadeIn editor" onClick={this.getAnswer4Html} onKeyUp={this.getAnswer4Html}>
+                  <div className=" editor animated fadeIn" onClick={this.getAnswer4Html} onKeyUp={this.getAnswer4Html}>
                     <Editor
                       ref={r => {
                         this.answer4 = r;
@@ -371,7 +411,7 @@ class CreateQuiz extends Component {
                 </Col>
 
                 <Col sm={{ span: 24 }} lg={{ span: check ? 12 : 24 }}>
-                  <div className="animated fadeIn editor" onClick={this.getHintHtml} onKeyUp={this.getHintHtml}>
+                  <div className=" editor animated fadeIn" onClick={this.getHintHtml} onKeyUp={this.getHintHtml}>
                     <Editor
                       ref={r => {
                         this.hint = r;
@@ -395,7 +435,7 @@ class CreateQuiz extends Component {
                 </Col>
 
                 <Col sm={{ span: 24 }} lg={{ span: check ? 12 : 24 }}>
-                  <div className="animated fadeIn editor" onClick={this.getSloveHtml} onKeyUp={this.getSloveHtml}>
+                  <div className=" editor animated fadeIn" onClick={this.getSloveHtml} onKeyUp={this.getSloveHtml}>
                     <Editor
                       ref={r => {
                         this.slove = r;

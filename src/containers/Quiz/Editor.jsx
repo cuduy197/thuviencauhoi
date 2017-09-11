@@ -39,7 +39,7 @@ export default class Editor extends React.Component {
           "insertTable",
           "|",
           "fontSize",
-          ,
+          "code",
           "paragraphFormat",
           "align",
           "formatOL",
@@ -88,8 +88,8 @@ export default class Editor extends React.Component {
               "|",
               "selectAll",
               "undo",
-              "fullscreen",
-              "redo"
+              "redo",
+              "fullscreen"
             ],
             //Medium
             toolbarButtonsMD: config,
@@ -109,7 +109,7 @@ export default class Editor extends React.Component {
   }
 
   setHtml(e) {
-    return $(`#${this.baseId}`).froalaEditor("html.set", e);
+    return $(`#${this.baseId}`).froalaEditor("html.set", String(e).normalize());
   }
 
   render() {

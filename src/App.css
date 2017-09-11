@@ -1,4 +1,6 @@
 body {
+    padding: 0;
+    margin: 0;
     font-family: "Comfortaa", sans-serif !important;
 }
 
@@ -35,7 +37,7 @@ body {
 }
 
 .center {
-    text-align: center !important;
+    text-align: center;
 }
 
 .card-quiz {
@@ -43,7 +45,8 @@ body {
 }
 
 .editor {
-    margin: 1em;
+    margin: 0em 0.5em .5em 0.5em;
+    text-align: left !important;
 }
 
 
